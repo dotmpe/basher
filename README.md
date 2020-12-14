@@ -115,6 +115,12 @@ globally or before each command:
 
 - `BASHER_FULL_CLONE=true` - Clones the full repo history instead of only the last commit (useful for package development)
 - `BASHER_PREFIX` - set the installation and package checkout prefix (default is `$BASHER_ROOT/cellar`).  Setting this to `/usr/local`, for example, will install binaries to `/usr/local/bin`, manpages to `/usr/local/man`, completions to `/usr/local/completions`, and clone packages to `/usr/local/packages`.  This allows you to manage "global packages", distinct from individual user packages.
+- `REMOVE_EXTENSION=true` - Remove filename extension before linking executables. This can be prescribed per package using the `package.sh` file, or can be provided through the local env.
+- Any package variable (`BINS`, `DEPS`, `BASH_COMPLETIONS` and
+  `ZSH_COMPLETIONS`) can be set, provided `package.sh` does not already providei
+  these.
+- `NO_PACKAGE_SH=true` allows to ignore and override all `package.sh` settings,
+  to manage customized or non-basher compliant packages.
 
 ## Packages
 

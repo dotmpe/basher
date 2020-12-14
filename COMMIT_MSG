@@ -1,0 +1,17 @@
+Upgraded package.sh support. Docs on env/package settings.
+
+- Added existing REMOVE_EXTENSION env var to README.
+- Changed package.sh usage, and added new env var NO_PACKAGE_SH.
+
+Putting a `package.sh` file into a project is the supported way to set BINS, DEPS and auto-completion variables for a project. There was no way to tell Basher about these otherwise.
+
+To allow installing non-basher compatible projects, settings for these variables
+can now be set per environment. `package.sh` does not need to be present, but
+because it is still loaded it will always override env settings. The var
+`NO_PACKAGE_SH` can be set to true to disregard `package.sh`.
+
+This change allows installing a larger selection of packages with Basher.
+Also Basher did not advertize REMOVE_EXTENSION var.
+
+- NOTE: there a are no settings governing man page detection/installation.
+- TODO: No tests for any of these changes yet.

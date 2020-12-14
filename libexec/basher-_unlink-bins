@@ -2,8 +2,12 @@
 
 package="$1"
 
-if [ -e "$BASHER_PACKAGES_PATH/$package/package.sh" ]; then
+if [ "$NO_PACKAGE_SH" != "true" -a \
+    -e "$BASHER_PACKAGES_PATH/$package/package.sh" ]; then
   source "$BASHER_PACKAGES_PATH/$package/package.sh"
+fi
+
+if [ -n "$BINS" ]; then
   IFS=: read -a bins <<< "$BINS"
 fi
 

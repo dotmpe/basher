@@ -2,15 +2,24 @@
 
 package="$1"
 
-if [ ! -e "$BASHER_PACKAGES_PATH/$package/package.sh" ]; then
-  exit
-fi
-
 shopt -s nullglob
 
-source "$BASHER_PACKAGES_PATH/$package/package.sh" # TODO: make this secure?
-IFS=: read -a bash_completions <<< "$BASH_COMPLETIONS"
-IFS=: read -a zsh_completions <<< "$ZSH_COMPLETIONS"
+if [ "$NO_PACKAGE_SH" != "true" -a \
+    -e "$BASHER_PACKAGES_PATH/$package/package.sh" ]; then
+  source "$BASHER_PACKAGES_PATH/$package/package.sh" # TODO: make this secure?
+fi
+
+if [ -n "$BASH_COMPLETIONS" ]; then
+  IFS=: read -a bash_completions <<< "$BASH_COMPLETIONS"
+else
+  bash_completions=()
+fi
+
+if [ -n "$ZSH_COMPLETIONS" ]; then
+  IFS=: read -a zsh_completions <<< "$ZSH_COMPLETIONS"
+else
+  zsh_completions=()
+fi
 
 for completion in "${bash_completions[@]}"
 do

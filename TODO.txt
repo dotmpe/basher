@@ -1,0 +1,3 @@
+(c) 2020-06-26 TODO: Make basher pick up any `package.sh` given through local env. Also a directive to disable `source .../package.sh` may be.
+(d) 2020-06-27 FIXME: Basher can install GIT references but does not explain/document (though online help on `install` mentions it)
+(e) 2020-06-27 Also the package/dependency ref works with `clone -b` (ie. branches and tags) but just not on any commit-ish. <https://github.com/basherpm/basher/issues/65> I think BASHER_FULL_CLONE could be set automatically for packages using a `<package>#<ref>` spec, and upgrade could emit a warning advising to re-install the package if a shallow clone is detected.

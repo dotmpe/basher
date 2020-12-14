@@ -17,14 +17,18 @@ fi
 
 package="$1"
 
-if [ ! -e "$BASHER_PACKAGES_PATH/$package/package.sh" ]; then
-  exit
-fi
-
 shopt -s nullglob
 
-source "$BASHER_PACKAGES_PATH/$package/package.sh"
-IFS=: read -a deps <<< "$DEPS"
+if [ "$NO_PACKAGE_SH" != "true" -a \
+    -e "$BASHER_PACKAGES_PATH/$package/package.sh" ]; then
+  source "$BASHER_PACKAGES_PATH/$package/package.sh"
+fi
+
+if [ -n "$DEPS" ]; then
+  IFS=: read -a deps <<< "$DEPS"
+else
+  deps=()
+fi
 
 for dep in "${deps[@]}"
 do
